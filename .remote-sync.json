@@ -1,0 +1,19 @@
+{
+  "logger": {
+    "title": "Remote Sync"
+  },
+  "uploadOnSave": true,
+  "useAtomicWrites": false,
+  "deleteLocal": false,
+  "hostname": "155.246.89.120",
+  "port": "22",
+  "target": "/home/calore/BigGAN-Tensorflow",
+  "ignore": [
+    ".remote-sync.json",
+    ".git/**"
+  ],
+  "username": "calore",
+  "password": "Agente007",
+  "watch": [],
+  "transport": "scp"
+}
