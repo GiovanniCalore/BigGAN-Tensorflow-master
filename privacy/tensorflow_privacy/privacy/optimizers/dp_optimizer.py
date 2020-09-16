@@ -168,14 +168,14 @@ def make_optimizer_class(cls):
                   tf.GraphKeys.TRAINABLE_RESOURCE_VARIABLES))
 
         sample_state = self._dp_sum_query.initial_sample_state(var_list)
-        print(len(sample_state))
+        #print(len(sample_state))
 
-        print(self._unroll_microbatches)
+        #print(self._unroll_microbatches)
         if self._unroll_microbatches:
           for idx in range(self._num_microbatches):
-            print(idx)
+            #print(idx)
             sample_state = process_microbatch(idx, sample_state)
-            print(len(sample_state))
+            #print(len(sample_state))
         else:
           # Use of while_loop here requires that sample_state be a nested
           # structure of tensors. In general, we would prefer to allow it to be
