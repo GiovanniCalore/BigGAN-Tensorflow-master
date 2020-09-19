@@ -369,11 +369,11 @@ def discriminator_loss(loss_func, real, fake):
     fake_loss = 0
 
     if loss_func.__contains__('wgan') :
-        #real_loss = -tf.reduce_mean(real)
-        #fake_loss = tf.reduce_mean(fake)
+        real_loss = -tf.reduce_mean(real)
+        fake_loss = tf.reduce_mean(fake)
         # MODIFICA----
-        real_loss = -real
-        fake_loss = fake
+        #real_loss = -real
+        #fake_loss = fake
         # ------------
 
     if loss_func == 'lsgan' :

@@ -32,7 +32,8 @@ class BigGAN_256(object):
     def __init__(self, sess, args):
         self.load_last_checkpoint = False
         self.model_name = "BigGAN"  # name for checkpoint
-        self.base_results_dir = './../../../raid/user_storage/calore/tmp_biggan_dir/'
+        self.base_results_dir = './results/'
+        self.dataset_dir = '../datasets/'
         self.sess = sess
         self.metrics = args.metrics
         self.dataset_name = args.dataset
@@ -360,6 +361,10 @@ class BigGAN_256(object):
         metrics = metric_base.MetricGroup([metric_defaults[metric] for metric in self.metrics])
         dataset_args = dnnlib.EasyDict(tfrecord_dir=self._tf_record_dataset, shuffle_mb=0)
 
+        # metrics
+        metrics.run(sess=self.sess, fake_images_random_normal=self.fake_images_random_normal, interp_images=self.interp_images, id=self.id + '_{:07d}'.format(counter), base_dir=self.base_results_dir, results_dir=self.results_dir, data_dir=self.dataset_dir, dataset_args=dataset_args)
+
+
         # loop for epoch
         start_time = time.time()
         past_g_loss = -1.
@@ -417,7 +422,7 @@ class BigGAN_256(object):
             self.save(self.base_results_dir + self.results_dir + '/' + self.checkpoint_dir, counter)
 
             # metrics
-            metrics.run(sess=self.sess, fake_images_random_normal=self.fake_images_random_normal, interp_images=self.interp_images, id=self.id + '_{:07d}'.format(counter), base_dir=self.base_results_dir, results_dir=self.results_dir, data_dir='../../../raid/user_storage/calore/datasets/', dataset_args=dataset_args)
+            metrics.run(sess=self.sess, fake_images_random_normal=self.fake_images_random_normal, interp_images=self.interp_images, id=self.id + '_{:07d}'.format(counter), base_dir=self.base_results_dir, results_dir=self.results_dir, data_dir=self.dataset_dir, dataset_args=dataset_args)
 
             # After an epoch, start_batch_id is set to zero
             # non-zero value is only for the first epoch after loading pre-trained model
